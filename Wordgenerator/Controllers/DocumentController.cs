@@ -33,13 +33,13 @@ namespace Wordgenerator.Controllers
                     Paragraph paragraph = document.Sections[0].AddParagraph();
 
                     DocPicture picture = paragraph.AppendPicture(Image.FromFile(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/stamp.png")));
-                    picture.Height = 80;
-                    picture.Width = 220;
+                    picture.Height = 110;
+                    picture.Width = 180;
                     picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
                     picture.TextWrappingType = TextWrappingType.Both;
 
                     picture.VerticalOrigin = VerticalOrigin.OuterMarginArea;
-                    picture.VerticalPosition = -60;
+                    picture.VerticalPosition = -70;
                     string output = path + "\\" + System.IO.Path.GetFileNameWithoutExtension(filePath) + ".pdf";
                     document.Protect(ProtectionType.AllowOnlyReading, "kinomania");
                     document.SaveToFile(output, FileFormat.PDF);

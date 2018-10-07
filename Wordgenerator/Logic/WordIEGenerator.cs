@@ -21,15 +21,18 @@ namespace Wordgenerator.Logic
             Thread.CurrentThread.CurrentCulture = new CultureInfo("uk-UA");
             string cityPeriodInfo = "";
             string fileNamePath = "";
+
+            var nowDate = DateTime.Now.ToString("yyyyMMdd_HHmm");
+
             if (dataForDoc.ThirdAgreementNumber != null)
             {
                 fileNamePath = string.Format(path +
-                    @"\{0}-{1}-{2}.docx", kontrahent.Number, film.Number, dataForDoc.ThirdAgreementNumber);
+                    @"\{0}-{1}-{2}-{3}.docx", kontrahent.Number, film.Number, dataForDoc.ThirdAgreementNumber, nowDate);
             }
             else
             {
                 fileNamePath = string.Format(path +
-                    @"\{0}-{1}.docx", kontrahent.Number, film.Number);
+                    @"\{0}-{1}-{2}.docx", kontrahent.Number, film.Number, nowDate);
             }
 
             var document = DocX.Create(fileNamePath);
@@ -235,7 +238,7 @@ namespace Wordgenerator.Logic
                 .Alignment = Alignment.center;
             if (dataForDoc.SessionModel.Count == 1)
             {
-                sessionTable.Rows[1].Cells[0].Paragraphs[0].Append(string.Format("{0} тиждень", dataForDoc.SessionModel[0].NumberOfWeek))
+                sessionTable.Rows[1].Cells[0].Paragraphs[0].Append(string.Format("{0}", dataForDoc.SessionModel[0].NumberOfWeek))
                  .Font(new Xceed.Words.NET.Font("Cambria"))
                  .FontSize(pageSize)
                  .Alignment = Alignment.center;
@@ -260,7 +263,7 @@ namespace Wordgenerator.Logic
             {
                 for (int i = 1; i <= dataForDoc.SessionModel.Count; i++)
                 {
-                    sessionTable.Rows[i].Cells[0].Paragraphs[0].Append(string.Format("{0} тиждень", dataForDoc.SessionModel[i - 1].NumberOfWeek))
+                    sessionTable.Rows[i].Cells[0].Paragraphs[0].Append(string.Format("{0}", dataForDoc.SessionModel[i - 1].NumberOfWeek))
                         .Font(new Xceed.Words.NET.Font("Cambria"))
                         .FontSize(pageSize)
                         .Alignment = Alignment.center;
@@ -314,6 +317,9 @@ namespace Wordgenerator.Logic
                 case (int)City.Odessa:
                     cityPeriodInfo = film.Odessa;
                     break;
+                case (int)City.Ajmaks4DX:
+                    cityPeriodInfo = film.Ajmaks4DX;
+                    break;      
                 default:
                     break;
             }
@@ -357,8 +363,7 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append("За користування Правом Демонстрування Фільму Демонстратор зобов'язаний сплатити Дистриб’ютору" +
-              " Роялті у розмірі 50% (п’ятдесят відсотків) від суми Касового Збору без податку на додану вартість.")
+              .Append(dataForDoc.RojaltiInfo)
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
@@ -451,7 +456,7 @@ namespace Wordgenerator.Logic
                 "м. Київ, вул. Іоанна Павла ІІ, б. 4/6, корп. \"А\", к. 821." + "\n" +
                 "П/р № 26008364029900 в АТ \"УКРСИББАНК\", м. Харків," + "\n" +
                 "МФО 351005." + "\n" +
-                "П/р №2600545501pageSize547 в АТ „ОТП \"Банк\", МФО 300528. " + "\n" +
+                "П/р №26005455018547 в АТ „ОТП \"Банк\", МФО 300528. " + "\n" +
                 "Ідентифікаційний код 32208748." + "\n" +
                 "Свідоцтво про внесення суб’єкта кінематографії до Державного реєстру виробників, розповсюджувачів" +
                 " і демонстраторів фільмів серії РУ № 000122 від 01.02.2012." + "\n" +
@@ -466,7 +471,7 @@ namespace Wordgenerator.Logic
                 "МФО {2}" + "\n" +
                 "Ідентифікаційний код {3}" + "\n" +
                 "{4}" + "\n" +
-                "{5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
+                "Демонстартор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
                 kontrahent.RegistrationLicense, kontrahent.TaxInfo))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)

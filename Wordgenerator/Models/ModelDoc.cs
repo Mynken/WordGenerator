@@ -9,7 +9,7 @@ namespace Wordgenerator.Models
     {
         public int KontrahentId { get; set; }
         public int FilmId { get; set; }
-        public int? ThirdAgreementNumber { get; set; }
+        public string ThirdAgreementNumber { get; set; }
         public DateTime FilmAgreeementDate { get; set; }
         public string GeneralAgreementType { get; set; }
         public DateTime GeneralAgreementDate { get; set; }
@@ -21,6 +21,7 @@ namespace Wordgenerator.Models
         public string FilmFormat { get; set; }
         public List<SessionModel> SessionModel { get; set; }
         public string TypeOfFilm { get; set; }
+        public string RojaltiInfo { get; set; }
         public string CartoonFilmInfo { get; set; }
         public int FilmPeriodInfo { get; set; }
         public int TimeZoneOffset { get; set; }

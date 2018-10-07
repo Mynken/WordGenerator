@@ -20,15 +20,17 @@ namespace Wordgenerator.Logic
             Thread.CurrentThread.CurrentCulture = new CultureInfo("uk-UA");
             string cityPeriodInfo = "";
             string fileNamePath = "";
+
+            var nowDate = DateTime.Now.ToString("yyyyMMdd_HHmm");
             if (dataForDoc.ThirdAgreementNumber != null)
             {
                 fileNamePath = string.Format(path +
-                    @"\{0}-{1}-{2}.docx", kontrahent.Number, film.Number, dataForDoc.ThirdAgreementNumber);
+                    @"\{0}-{1}-{2}-{3}.docx", kontrahent.Number, film.Number, dataForDoc.ThirdAgreementNumber, nowDate);
             }
             else
             {
                 fileNamePath = string.Format(path +
-                    @"\{0}-{1}.docx", kontrahent.Number, film.Number);
+                    @"\{0}-{1}-{2}.docx", kontrahent.Number, film.Number, nowDate);
             }
 
             var document = DocX.Create(fileNamePath);
@@ -234,7 +236,7 @@ namespace Wordgenerator.Logic
                 .Alignment = Alignment.center;
             if (dataForDoc.SessionModel.Count == 1)
             {
-                sessionTable.Rows[1].Cells[0].Paragraphs[0].Append(string.Format("{0} тиждень", dataForDoc.SessionModel[0].NumberOfWeek))
+                sessionTable.Rows[1].Cells[0].Paragraphs[0].Append(string.Format("{0}", dataForDoc.SessionModel[0].NumberOfWeek))
                  .Font(new Xceed.Words.NET.Font("Cambria"))
                  .FontSize(pageSize)
                  .Alignment = Alignment.center;
@@ -259,7 +261,7 @@ namespace Wordgenerator.Logic
             {
                 for (int i = 1; i <= dataForDoc.SessionModel.Count; i++)
                 {
-                    sessionTable.Rows[i].Cells[0].Paragraphs[0].Append(string.Format("{0} тиждень", dataForDoc.SessionModel[i - 1].NumberOfWeek))
+                    sessionTable.Rows[i].Cells[0].Paragraphs[0].Append(string.Format("{0}", dataForDoc.SessionModel[i - 1].NumberOfWeek))
                         .Font(new Xceed.Words.NET.Font("Cambria"))
                         .FontSize(pageSize)
                         .Alignment = Alignment.center;
@@ -465,7 +467,7 @@ namespace Wordgenerator.Logic
                 "МФО {2}" + "\n" +
                 "Ідентифікаційний код {3}" + "\n" +
                 "{4}" + "\n" +
-                "{5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
+                "Демонстартор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
                 kontrahent.License, kontrahent.TaxInfo))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)

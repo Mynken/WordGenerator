@@ -18,5 +18,6 @@ namespace Wordgenerator.Models.DAL.Films
         public string MainCities { get; set; }
         public string Odessa { get; set; }
         public string OtherCities { get; set; }
+        public string Ajmaks4DX { get; set; }
     }
 }
