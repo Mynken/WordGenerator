@@ -23,7 +23,6 @@ namespace Wordgenerator.Models
         public string TypeOfFilm { get; set; }
         public string RojaltiInfo { get; set; }
         public string CartoonFilmInfo { get; set; }
-        public int FilmPeriodInfo { get; set; }
         public int TimeZoneOffset { get; set; }
         public bool IsPdf { get; set; }
         public string DaysInfo { get; set; }
