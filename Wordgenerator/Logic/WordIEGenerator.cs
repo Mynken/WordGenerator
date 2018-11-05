@@ -100,7 +100,7 @@ namespace Wordgenerator.Logic
               .FontSize(pageSize)
               .Alignment = Alignment.both;
 
-            document.InsertParagraph(string.Format("на виконання вимог Генерального Договору № {0} від {1} (далі - Договір)," +
+            document.InsertParagraph(string.Format("на виконання вимог Генерального Договору № {0} від {1} року (далі - Договір)," +
                 " домовились про таке:", dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.ToString("d MMMM yyyy")))
                .Font(new Xceed.Words.NET.Font("Cambria"))
                .FontSize(pageSize)
@@ -496,11 +496,23 @@ namespace Wordgenerator.Logic
                .FontSize(pageSize)
                .Bold()
               .Alignment = Alignment.left;
-            requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
+
+            if (kontrahent.Signature.Length >= 14)
+            {
+                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_________________________ {0}", kontrahent.Signature))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .Bold()
                .Alignment = Alignment.left;
+            }
+            else
+            {
+                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
+                .Font(new Xceed.Words.NET.Font("Cambria"))
+                .FontSize(pageSize)
+                .Bold()
+               .Alignment = Alignment.left;
+            }
 
             document.InsertTable(requsiteTable);
 
