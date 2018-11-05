@@ -26,5 +26,6 @@ namespace Wordgenerator.Models
         public int TimeZoneOffset { get; set; }
         public bool IsPdf { get; set; }
         public string DaysInfo { get; set; }
+        public int FilmPeriodInfo { get; set; }
     }
 }

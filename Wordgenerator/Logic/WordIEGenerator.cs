@@ -306,7 +306,33 @@ namespace Wordgenerator.Logic
              .FontSize(pageSize)
              .Alignment = Alignment.both;
 
+            switch (dataForDoc.FilmPeriodInfo)
+            {
+                case (int)City.MainCities:
+                    cityPeriodInfo = film.MainCities;
+                    break;
+                case (int)City.OtherCities:
+                    cityPeriodInfo = film.OtherCities;
+                    break;
+                case (int)City.Odessa:
+                    cityPeriodInfo = film.Odessa;
+                    break;
+                case (int)City.Ajmaks4DX:
+                    cityPeriodInfo = film.Ajmaks4DX;
+                    break;
+                default:
+                    break;
+            }
             document.InsertParagraph("12. ")
+              .Font(new Xceed.Words.NET.Font("Cambria"))
+              .FontSize(pageSize)
+              .Bold()
+              .Append(cityPeriodInfo)
+              .Font(new Xceed.Words.NET.Font("Cambria"))
+              .FontSize(pageSize)
+              .Alignment = Alignment.both;
+
+            document.InsertParagraph("13. ")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
@@ -315,7 +341,7 @@ namespace Wordgenerator.Logic
               .FontSize(pageSize)
               .Alignment = Alignment.both;
 
-            document.InsertParagraph("13. ")
+            document.InsertParagraph("14. ")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
@@ -333,7 +359,7 @@ namespace Wordgenerator.Logic
                     .Alignment = Alignment.left;
             }
 
-            document.InsertParagraph("14. ")
+            document.InsertParagraph("15. ")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
@@ -342,7 +368,7 @@ namespace Wordgenerator.Logic
               .FontSize(pageSize)
               .Alignment = Alignment.both;
 
-            document.InsertParagraph("15. ")
+            document.InsertParagraph("16. ")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Bold()
@@ -369,7 +395,7 @@ namespace Wordgenerator.Logic
              .FontSize(pageSize)
              .Alignment = Alignment.both;
 
-            document.InsertParagraph("16. ")
+            document.InsertParagraph("17. ")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Bold()
@@ -378,7 +404,7 @@ namespace Wordgenerator.Logic
              .FontSize(pageSize)
              .Alignment = Alignment.both;
 
-            document.InsertParagraph("17. ")
+            document.InsertParagraph("18. ")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Bold()
@@ -389,7 +415,7 @@ namespace Wordgenerator.Logic
              .SpacingAfter(10d)
              .Alignment = Alignment.both;
 
-            document.InsertParagraph("18. РЕКВІЗИТИ ТА ПІДПИСИ СТОРІН")
+            document.InsertParagraph("19. РЕКВІЗИТИ ТА ПІДПИСИ СТОРІН")
             .Font(new Xceed.Words.NET.Font("Cambria"))
             .FontSize(pageSize)
             .Bold()

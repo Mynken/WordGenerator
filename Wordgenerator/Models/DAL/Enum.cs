@@ -29,4 +29,12 @@ namespace Wordgenerator.Models.DAL
         [Description("FOP")]
         IE = 2001
     }
+
+    public enum City
+    {
+        MainCities = 3000,
+        OtherCities = 3001,
+        Odessa = 3002,
+        Ajmaks4DX = 3003
+    }
 }
