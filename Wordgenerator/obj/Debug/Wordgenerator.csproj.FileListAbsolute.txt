@@ -147,7 +147,6 @@ F:\VS_Projects\Wordgenerator\Wordgenerator\bin\Microsoft.AI.DependencyCollector.
 F:\VS_Projects\Wordgenerator\Wordgenerator\bin\Microsoft.AI.ServerTelemetryChannel.xml
 F:\VS_Projects\Wordgenerator\Wordgenerator\bin\Microsoft.AI.WindowsServer.xml
 F:\VS_Projects\Wordgenerator\Wordgenerator\bin\Microsoft.AI.Web.xml
-F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csprojAssemblyReference.cache
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csproj.CoreCompileInputs.cache
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csproj.CopyComplete
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.dll
