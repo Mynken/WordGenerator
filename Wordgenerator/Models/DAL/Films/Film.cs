@@ -15,9 +15,5 @@ namespace Wordgenerator.Models.DAL.Films
         public string DurationTime { get; set; }
         public string Language { get; set; }
         public DateTime AgreeementDate { get; set; }
-        public string MainCities { get; set; }
-        public string Odessa { get; set; }
-        public string OtherCities { get; set; }
-        public string Ajmaks4DX { get; set; }
     }
 }
