@@ -95,12 +95,12 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append(" далі – Демонстратор, в особі " + kontrahent.ActingUnder + ", з іншої сторони, а разом – Сторони,")
+              .Append(", далі – Демонстратор, в особі " + kontrahent.ActingUnder + ", з іншої сторони, а разом – Сторони,")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
 
-            document.InsertParagraph(string.Format("на виконання вимог Генерального Договору № {0} від {1} року (далі - Договір)," +
+            document.InsertParagraph(string.Format("на виконання вимог Генерального договору № {0} від {1} року (далі - Договір)," +
                 " домовились про таке:", dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.ToString("d MMMM yyyy")))
                .Font(new Xceed.Words.NET.Font("Cambria"))
                .FontSize(pageSize)
@@ -214,6 +214,11 @@ namespace Wordgenerator.Logic
 
             // Add a Table into the document and sets its values.
             var sessionTable = document.AddTable(dataForDoc.SessionModel.Count + 1, 5);
+
+            if (dataForDoc.IsMultipleks == true)
+            {
+                sessionTable = document.AddTable(dataForDoc.SessionModel.Count + 1, 4);
+            }
             sessionTable.AutoFit = AutoFit.Contents;
             sessionTable.Alignment = Alignment.center;
             sessionTable.Rows[0].Cells[0].Paragraphs[0].Append("№ тижня")
@@ -232,10 +237,15 @@ namespace Wordgenerator.Logic
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .Alignment = Alignment.center;
-            sessionTable.Rows[0].Cells[4].Paragraphs[0].Append("Дата оплати")
-                .Font(new Xceed.Words.NET.Font("Cambria"))
-                .FontSize(pageSize)
-                .Alignment = Alignment.center;
+
+            if (dataForDoc.IsMultipleks != true)
+            {
+                sessionTable.Rows[0].Cells[4].Paragraphs[0].Append("Дата оплати")
+                    .Font(new Xceed.Words.NET.Font("Cambria"))
+                    .FontSize(pageSize)
+                    .Alignment = Alignment.center;
+            }
+
             if (dataForDoc.SessionModel.Count == 1)
             {
                 sessionTable.Rows[1].Cells[0].Paragraphs[0].Append(string.Format("{0}", dataForDoc.SessionModel[0].NumberOfWeek))
@@ -254,10 +264,13 @@ namespace Wordgenerator.Logic
                     .Font(new Xceed.Words.NET.Font("Cambria"))
                     .FontSize(pageSize)
                     .Alignment = Alignment.center;
-                sessionTable.Rows[1].Cells[4].Paragraphs[0].Append(dataForDoc.SessionModel[0].PaymentDate.AddHours(dataForDoc.TimeZoneOffset).ToShortDateString())
+                if (dataForDoc.IsMultipleks != true)
+                {
+                    sessionTable.Rows[1].Cells[4].Paragraphs[0].Append(dataForDoc.SessionModel[0].PaymentDate.AddHours(dataForDoc.TimeZoneOffset).ToShortDateString())
                     .Font(new Xceed.Words.NET.Font("Cambria"))
                     .FontSize(pageSize)
                     .Alignment = Alignment.center;
+                }
             }
             else
             {
@@ -279,10 +292,14 @@ namespace Wordgenerator.Logic
                         .Font(new Xceed.Words.NET.Font("Cambria"))
                         .FontSize(pageSize)
                         .Alignment = Alignment.center;
-                    sessionTable.Rows[i].Cells[4].Paragraphs[0].Append(dataForDoc.SessionModel[i - 1].PaymentDate.AddHours(dataForDoc.TimeZoneOffset).ToShortDateString())
+
+                    if (dataForDoc.IsMultipleks != true)
+                    {
+                        sessionTable.Rows[i].Cells[4].Paragraphs[0].Append(dataForDoc.SessionModel[i - 1].PaymentDate.AddHours(dataForDoc.TimeZoneOffset).ToShortDateString())
                         .Font(new Xceed.Words.NET.Font("Cambria"))
                         .FontSize(pageSize)
                         .Alignment = Alignment.center;
+                    }
                 }
 
             }
@@ -319,6 +336,15 @@ namespace Wordgenerator.Logic
                     break;
                 case (int)City.Ajmaks4DX:
                     cityPeriodInfo = film.Ajmaks4DX;
+                    break;
+                case (int)City.MainCities1:
+                    cityPeriodInfo = film.MainCities1;
+                    break;
+                case (int)City.OtherCities1:
+                    cityPeriodInfo = film.OtherCities1;
+                    break;
+                case (int)City.Odessa1:
+                    cityPeriodInfo = film.Odessa1;
                     break;
                 default:
                     break;
@@ -471,7 +497,7 @@ namespace Wordgenerator.Logic
                 "МФО {2}" + "\n" +
                 "Ідентифікаційний код {3}" + "\n" +
                 "{4}" + "\n" +
-                "Демонстартор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
+                "Демонстратор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
                 kontrahent.RegistrationLicense, kontrahent.TaxInfo))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
@@ -497,22 +523,38 @@ namespace Wordgenerator.Logic
                .Bold()
               .Alignment = Alignment.left;
 
-            if (kontrahent.Signature.Length >= 14)
+            //if (kontrahent.Signature.Length >= 14)
+            //{
+            //    requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_________________________ {0}", kontrahent.Signature))
+            //    .Font(new Xceed.Words.NET.Font("Cambria"))
+            //    .FontSize(pageSize)
+            //    .Bold()
+            //   .Alignment = Alignment.left;
+            //}
+            //else
+            //{
+            //    requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
+            //    .Font(new Xceed.Words.NET.Font("Cambria"))
+            //    .FontSize(pageSize)
+            //    .Bold()
+            //   .Alignment = Alignment.left;
+            //}
+
+            int allSpace = 70 - kontrahent.Signature.Length;
+            string signatureUnderline = "";
+
+            for (int i = 1; i < allSpace; i++)
             {
-                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_________________________ {0}", kontrahent.Signature))
-                .Font(new Xceed.Words.NET.Font("Cambria"))
-                .FontSize(pageSize)
-                .Bold()
-               .Alignment = Alignment.left;
+                signatureUnderline += "_";
             }
-            else
-            {
-                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
-                .Font(new Xceed.Words.NET.Font("Cambria"))
-                .FontSize(pageSize)
-                .Bold()
-               .Alignment = Alignment.left;
-            }
+
+            requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("{0} {1}", signatureUnderline, kontrahent.Signature))
+              .Font(new Xceed.Words.NET.Font("Cambria"))
+              .FontSize(pageSize)
+              .Bold()
+             .Alignment = Alignment.left;
+
+
 
             document.InsertTable(requsiteTable);
 

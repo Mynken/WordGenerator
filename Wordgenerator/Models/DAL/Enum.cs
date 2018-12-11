@@ -35,6 +35,9 @@ namespace Wordgenerator.Models.DAL
         MainCities = 3000,
         OtherCities = 3001,
         Odessa = 3002,
-        Ajmaks4DX = 3003
+        Ajmaks4DX = 3003,
+        MainCities1 = 3004,
+        OtherCities1 = 3005,
+        Odessa1 = 3006
     }
 }

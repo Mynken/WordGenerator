@@ -27,5 +27,6 @@ namespace Wordgenerator.Models
         public bool IsPdf { get; set; }
         public string DaysInfo { get; set; }
         public int FilmPeriodInfo { get; set; }
+        public bool? IsMultipleks { get; set; } = false;
     }
 }

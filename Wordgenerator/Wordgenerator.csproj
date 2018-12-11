@@ -189,6 +189,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DocumentAdditionalIeController.cs" />
+    <Compile Include="Controllers\DocumentAdditionalllcController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\DocumentLlcController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,8 +198,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Additional\AdditionalIEGenerator.cs" />
+    <Compile Include="Logic\Additional\AdditionalLLCGenerator.cs" />
     <Compile Include="Logic\WordIEGenerator.cs" />
     <Compile Include="Logic\WordLLCGenerator.cs" />
+    <Compile Include="Models\DAL\Additional\AdditionalIE.cs" />
+    <Compile Include="Models\DAL\Additional\AdditionalLLC.cs" />
     <Compile Include="Models\DAL\Enum.cs" />
     <Compile Include="Models\DAL\Films\Film.cs" />
     <Compile Include="Models\DAL\Films\Trailer.cs" />
@@ -266,7 +272,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Additional\" />
+    <Folder Include="Views\AdditionalDocumentIE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

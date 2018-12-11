@@ -56,7 +56,7 @@ namespace Wordgenerator.Logic
             }
 
             document.InsertParagraph(string.Format("до Генерального договору № {0} від {1} року",
-                dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.AddHours(dataForDoc.TimeZoneOffset).ToString("d MMMM yyyyy")))
+                dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.AddHours(dataForDoc.TimeZoneOffset).ToString("d MMMM yyyy")))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .Bold()
@@ -93,12 +93,12 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append(", яка діє на підставі " + kontrahent.ActingUnder + ", далі – Демонстратор, з іншої сторони, а разом – Сторони,")
+              .Append(", що діє на підставі " + kontrahent.ActingUnder + ", далі – Демонстратор, з іншої сторони, а разом – Сторони,")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
 
-            document.InsertParagraph(string.Format("на виконання вимог Генерального Договору № {0} від {1} року (далі - Договір)," +
+            document.InsertParagraph(string.Format("на виконання вимог Генерального договору № {0} від {1} року (далі - Договір)," +
                 " домовились про таке:", dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.ToString("d MMMM yyyy")))
                .Font(new Xceed.Words.NET.Font("Cambria"))
                .FontSize(pageSize)
@@ -315,6 +315,15 @@ namespace Wordgenerator.Logic
                 case (int)City.Odessa:
                     cityPeriodInfo = film.Odessa;
                     break;
+                case (int)City.MainCities1:
+                    cityPeriodInfo = film.MainCities1;
+                    break;
+                case (int)City.OtherCities1:
+                    cityPeriodInfo = film.OtherCities1;
+                    break;
+                case (int)City.Odessa1:
+                    cityPeriodInfo = film.Odessa1;
+                    break;
                 default:
                     break;
             }
@@ -467,7 +476,7 @@ namespace Wordgenerator.Logic
                 "МФО {2}" + "\n" +
                 "Ідентифікаційний код {3}" + "\n" +
                 "{4}" + "\n" +
-                "Демонстартор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
+                "Демонстратор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
                 kontrahent.License, kontrahent.TaxInfo))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
@@ -493,22 +502,38 @@ namespace Wordgenerator.Logic
                .Bold()
               .Alignment = Alignment.left;
 
-            if (kontrahent.Signature.Length >= 14)
+            //if (kontrahent.Signature.Length >= 14)
+            //{
+            //    requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_________________________ {0}", kontrahent.Signature))
+            //    .Font(new Xceed.Words.NET.Font("Cambria"))
+            //    .FontSize(pageSize)
+            //    .Bold()
+            //   .Alignment = Alignment.left;
+            //}
+            //else
+            //{
+            //    requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
+            //      .Font(new Xceed.Words.NET.Font("Cambria"))
+            //      .FontSize(pageSize)
+            //      .Bold()
+            //     .Alignment = Alignment.left;
+            //}
+
+            int allSpace = 70 - kontrahent.Signature.Length;
+            string signatureUnderline = "";
+
+            for (int i = 1; i < allSpace; i++)
             {
-                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_________________________ {0}", kontrahent.Signature))
-                .Font(new Xceed.Words.NET.Font("Cambria"))
-                .FontSize(pageSize)
-                .Bold()
-               .Alignment = Alignment.left;
+                signatureUnderline += "_";
             }
-            else
-            {
-                requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("_______________________________________________________ {0}", kontrahent.Signature))
-                  .Font(new Xceed.Words.NET.Font("Cambria"))
-                  .FontSize(pageSize)
-                  .Bold()
-                 .Alignment = Alignment.left;
-            }
+
+            requsiteTable.Rows[4].Cells[1].Paragraphs[0].Append(string.Format("{0} {1}", signatureUnderline, kontrahent.Signature))
+              .Font(new Xceed.Words.NET.Font("Cambria"))
+              .FontSize(pageSize)
+              .Bold()
+             .Alignment = Alignment.left;
+
+
             document.InsertTable(requsiteTable);
 
             document.Save();
