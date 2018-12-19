@@ -56,7 +56,7 @@ namespace Wordgenerator.Logic
             }
 
             document.InsertParagraph(string.Format("до Генерального договору № {0} від {1} року",
-                dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.AddHours(dataForDoc.TimeZoneOffset).ToString("d MMMM yyyy")))
+                dataForDoc.GeneralAgreementType, dataForDoc.GeneralAgreementDate.AddHours(dataForDoc.TimeZoneOffset).ToString("dd MMMM yyyy")))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .Bold()
@@ -70,7 +70,7 @@ namespace Wordgenerator.Logic
                  .FontSize(pageSize)
                  .Bold()
                 .Alignment = Alignment.left;
-            headerInfo.Rows[0].Cells[1].Paragraphs[0].Append(dataForDoc.FilmAgreeementDate.AddHours(dataForDoc.TimeZoneOffset).ToString("d MMMM yyyy") + " року")
+            headerInfo.Rows[0].Cells[1].Paragraphs[0].Append(dataForDoc.FilmAgreeementDate.AddHours(dataForDoc.TimeZoneOffset + 1).ToString("d MMMM yyyy") + " року")
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .Bold()
@@ -367,8 +367,7 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append("За користування Правом Демонстрування Фільму Демонстратор зобов'язаний сплатити Дистриб’ютору" +
-              " Роялті у розмірі 50% (п’ятдесят відсотків) від суми Касового Збору без податку на додану вартість.")
+              .Append(dataForDoc.RojaltiInfo)
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
@@ -476,8 +475,9 @@ namespace Wordgenerator.Logic
                 "МФО {2}" + "\n" +
                 "Ідентифікаційний код {3}" + "\n" +
                 "{4}" + "\n" +
-                "Демонстратор є платником {5}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
-                kontrahent.License, kontrahent.TaxInfo))
+                "{5}" + "\n" +
+                "Демонстратор є платником {6}", kontrahent.Adress, kontrahent.CurrentBankAccount, kontrahent.Mfo, kontrahent.IdentificationCode,
+                kontrahent.License, kontrahent.RegistrationLicense, kontrahent.TaxInfo))
                 .Font(new Xceed.Words.NET.Font("Cambria"))
                 .FontSize(pageSize)
                 .SpacingAfter(10d)
