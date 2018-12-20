@@ -83,8 +83,8 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append(" далі – Дистриб’ютор, в особі директора Буймістер Людмили Анатоліївни," +
-                " яка діє на підставі Статуту, з однієї сторони, та")
+              .Append(" далі – Дистриб’ютор, в особі директора Францкевича Кирила Iгоровича," +
+                " який діє на підставі Статуту, з однієї сторони, та")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
@@ -379,7 +379,7 @@ namespace Wordgenerator.Logic
              .Append("Демонстратор сплачує Роялті шляхом перерахування коштів на один із поточних рахунків Дистриб’ютора ")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
-             .Append("№26008364029900 в АТ „УкрСиббанк”, МФО 351005")
+             .Append("№26008364029900 в АТ „УкрСиббанк”, МФО 351005")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Bold()
@@ -390,11 +390,7 @@ namespace Wordgenerator.Logic
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Bold()
-             .Append(" не пізніше ")
-             .Font(new Xceed.Words.NET.Font("Cambria"))
-             .FontSize(pageSize)
-             .Append("2 (двох) банківських днів після закінчення кожного тижня Демонстрування Фільму.")
-             .Bold()
+             .Append(" не пізніше дати оплати, зазначеної в п. 10 Додатку.")
              .Font(new Xceed.Words.NET.Font("Cambria"))
              .FontSize(pageSize)
              .Alignment = Alignment.both;
@@ -496,7 +492,7 @@ namespace Wordgenerator.Logic
                 .SpacingAfter(20d)
                .Alignment = Alignment.left;
 
-            requsiteTable.Rows[4].Cells[0].Paragraphs[0].Append("________________________________________________ Л.А. Буймістер")
+            requsiteTable.Rows[4].Cells[0].Paragraphs[0].Append("________________________________________________ К.I. Францкевич")
                .Font(new Xceed.Words.NET.Font("Cambria"))
                .FontSize(pageSize)
                .Bold()

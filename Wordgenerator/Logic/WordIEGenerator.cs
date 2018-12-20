@@ -85,8 +85,8 @@ namespace Wordgenerator.Logic
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Bold()
-              .Append(" далі – Дистриб’ютор, в особі директора Буймістер Людмили Анатоліївни," +
-                " яка діє на підставі Статуту, з однієї сторони, та")
+              .Append(" далі – Дистриб’ютор, в особі директора Францкевича Кирила Iгоровича," +
+                " який діє на підставі Статуту, з однієї сторони, та")
               .Font(new Xceed.Words.NET.Font("Cambria"))
               .FontSize(pageSize)
               .Alignment = Alignment.both;
@@ -516,7 +516,7 @@ namespace Wordgenerator.Logic
                 .SpacingAfter(20d)
                .Alignment = Alignment.left;
 
-            requsiteTable.Rows[4].Cells[0].Paragraphs[0].Append("________________________________________________ Л.А. Буймістер")
+            requsiteTable.Rows[4].Cells[0].Paragraphs[0].Append("________________________________________________ К.I. Францкевич")
                .Font(new Xceed.Words.NET.Font("Cambria"))
                .FontSize(pageSize)
                .Bold()
