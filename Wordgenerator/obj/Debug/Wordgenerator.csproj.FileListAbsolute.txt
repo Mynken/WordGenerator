@@ -151,4 +151,3 @@ F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csproj.CoreCo
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csproj.CopyComplete
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.dll
 F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.pdb
-F:\VS_Projects\Wordgenerator\Wordgenerator\obj\Debug\Wordgenerator.csprojAssemblyReference.cache
